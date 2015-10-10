@@ -43,8 +43,6 @@ class Board:
         if didShotHit:
             # If the ship wasn't sunk try to hit it some more
             self.player1.generate_could_be_ships(shot[0], shot[1])
-        else:
-            self.player1.clear_could_be_ships()
         return
 
 
@@ -85,34 +83,35 @@ class Board:
                     toPrint += "|_"
                 if j == WIDTH - 1:
                     toPrint += "|\n"
-        # Seperate the boards
-        toPrint += "\n"
-        beginning = True
-        for i in range(HEIGHT):
-            for j in range(WIDTH):
-                if beginning:
-                    toPrint += "   " + ("  " * (WIDTH // 2)) + " X\n   "
-                    for each in range(WIDTH):
-                        toPrint += " " + str(each)
-                    toPrint += "\n   " + (" _" * WIDTH) + "\n"
-                    beginning = False
-                if j == 0 and i != HEIGHT // 2:
-                    toPrint += "  " + str(i)
-                elif j == 0 and i == HEIGHT // 2:
-                    toPrint += "Y " + str(i)
-                if self.player2.ship1.is_hit_by_shot(j, i) or self.player2.ship2.is_hit_by_shot(j, i):
-                    # One of my ships is here and it has been hit
-                    if [j, i] in self.player2.shotsTaken:
-                        toPrint += "|X"
-                    # One of my ships is here
+        if player2:
+            # Seperate the boards
+            toPrint += "\n"
+            beginning = True
+            for i in range(HEIGHT):
+                for j in range(WIDTH):
+                    if beginning:
+                        toPrint += "   " + ("  " * (WIDTH // 2)) + " X\n   "
+                        for each in range(WIDTH):
+                            toPrint += " " + str(each)
+                        toPrint += "\n   " + (" _" * WIDTH) + "\n"
+                        beginning = False
+                    if j == 0 and i != HEIGHT // 2:
+                        toPrint += "  " + str(i)
+                    elif j == 0 and i == HEIGHT // 2:
+                        toPrint += "Y " + str(i)
+                    if self.player2.ship1.is_hit_by_shot(j, i) or self.player2.ship2.is_hit_by_shot(j, i):
+                        # One of my ships is here and it has been hit
+                        if [j, i] in self.player2.shotsTaken:
+                            toPrint += "|X"
+                        # One of my ships is here
+                        else:
+                            toPrint += "|+"
+                    elif [j, i] in self.player2.shotsTaken:
+                        toPrint += "|•"
                     else:
-                        toPrint += "|+"
-                elif [j, i] in self.player2.shotsTaken:
-                    toPrint += "|•"
-                else:
-                    toPrint += "|_"
-                if j == WIDTH - 1:
-                    toPrint += "|\n"
+                        toPrint += "|_"
+                    if j == WIDTH - 1:
+                        toPrint += "|\n"
         print(toPrint)
         return
 

@@ -30,7 +30,7 @@ def analyze_coordinates(coordinates):
         if is_coordinate_on_board(coordinates[0], coordinates[1]):
             return coordinates
         else:
-            print("You coordinates you entered were not in range, acceptable ranges are x: 0-", (WIDTH - 1), " and y: 0-", (HEIGHT - 1), sep="")
+            print("The coordinates you entered were not in range, acceptable ranges are x: 0-", (WIDTH - 1), " and y: 0-", (HEIGHT - 1), sep="")
     else:
         print("You entered the coordinates in the wrong format, please follow this example: \"x,y\"")
 
