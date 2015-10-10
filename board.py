@@ -83,7 +83,7 @@ class Board:
                     toPrint += "|_"
                 if j == WIDTH - 1:
                     toPrint += "|\n"
-        if player2:
+        if self.player2:
             # Seperate the boards
             toPrint += "\n"
             beginning = True
